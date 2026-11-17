@@ -1,0 +1,876 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="soft boy: fresh mochi taiyaki, japanese-style soft serve and drinks, made to order in fairfax, va. order online, catering, merch.">
+<meta name="theme-color" content="#f6f6f0">
+<link rel="icon" href="img/face.svg" type="image/svg+xml">
+<title>Soft Boy Taiyaki &amp; Soft Serve</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Quicksand:wght@500;600;700&display=swap">
+<style>
+/* Layout: flat cream "menu paper" page, big bubble type, hero with a swimming flavor parade, a taiyaki that cracks open on scroll, full-bleed green bands with wavy edges. */
+:root{
+  --cream:#f6f6f0;      /* page ground, from the menu */
+  --card:#fffef9;
+  --ink:#33402c;
+  --muted:#79836e;
+  --green:#76976c;      /* soft boy green */
+  --deep:#547d47;       /* menu label green */
+  --sage:#9eb594;       /* cup green */
+  --sage-soft:#e6ebdd;
+  --band:#76976c;
+  --band-ink:#f6f6f0;
+  --dark-band:#3c4f35;
+  --custard:#f0c75a;
+  --custard-light:#fbe39a;
+  --custard-deep:#e0ab38;
+  --shadow:0 10px 30px rgba(60,79,53,.12);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --cream:#21261c; --card:#2a3123; --ink:#e9ecdd; --muted:#a8b19a;
+    --green:#8fb080; --deep:#b4cfa3; --sage:#87a07c; --sage-soft:#303827;
+    --band:#54714a; --band-ink:#f0f3e6; --dark-band:#1a1f16;
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --cream:#21261c; --card:#2a3123; --ink:#e9ecdd; --muted:#a8b19a;
+  --green:#8fb080; --deep:#b4cfa3; --sage:#87a07c; --sage-soft:#303827;
+  --band:#54714a; --band-ink:#f0f3e6; --dark-band:#1a1f16;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+  color-scheme: dark;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--cream); color:var(--ink);
+  font-family:"Quicksand",ui-rounded,system-ui,sans-serif;
+  font-weight:500; line-height:1.65; overflow-x:hidden;
+}
+img{max-width:100%; height:auto}
+a{color:var(--deep)}
+button{font:inherit; color:inherit; background:none; border:0; padding:0; cursor:pointer}
+.wrap{
+  max-width:1060px; margin-inline:auto;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+}
+section{scroll-margin-top:90px}
+
+.only-dark{display:none !important}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .only-light{display:none !important}
+  :root:not([data-theme="light"]) .only-dark{display:inline-block !important}
+}
+:root[data-theme="dark"] .only-light{display:none !important}
+:root[data-theme="dark"] .only-dark{display:inline-block !important}
+
+/* ---------- header ---------- */
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:60; background:var(--cream)}
+.nav{
+  position:sticky; top:env(safe-area-inset-top,0px); z-index:50;
+  background:color-mix(in srgb, var(--cream) 88%, transparent);
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  border-bottom:1.5px solid var(--sage-soft);
+}
+.nav .wrap{display:flex; align-items:center; gap:18px; height:64px}
+.nav .brand{display:flex; align-items:center; gap:10px; margin-right:auto; text-decoration:none}
+.nav .brand img.face{width:38px; height:38px; transition:transform .25s ease}
+.nav .brand:hover img.face{transform:rotate(-10deg) scale(1.08)}
+.nav .brand img.wm{width:104px}
+.nav a.link{
+  text-decoration:none; color:var(--ink); font-weight:700; font-size:.82rem;
+  letter-spacing:.14em; text-transform:lowercase; padding:6px 2px;
+}
+.nav a.link:hover{color:var(--deep)}
+.nav .btn{font-size:.92rem; padding:9px 20px 11px}
+@media (max-width:760px){ .nav a.link, .nav .brand img.wm{display:none !important} }
+
+.btn{
+  display:inline-block; text-decoration:none; font-family:"Baloo 2",sans-serif;
+  font-weight:700; font-size:1.02rem; letter-spacing:.02em; text-transform:lowercase;
+  padding:10px 22px 12px; border-radius:999px; border:2.5px solid var(--deep);
+  transition:transform .15s ease, background .15s ease, color .15s ease;
+}
+.btn:hover{transform:translateY(-2px) rotate(-1deg)}
+.btn-solid{background:var(--deep); color:var(--cream)}
+.btn-solid:hover{background:var(--green); border-color:var(--green)}
+.btn-ghost{color:var(--deep); background:transparent}
+.btn-ghost:hover{background:var(--sage-soft)}
+.btn-cream{background:#f6f6f0; color:#3c4f35; border-color:#f6f6f0}
+.btn-cream:hover{background:#fff; border-color:#fff}
+.btn-big{font-size:1.01rem; padding:11px 25px 13px}
+
+/* ---------- type ---------- */
+.eyebrow{
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  font-weight:700; font-size:.8rem; letter-spacing:.22em; text-transform:lowercase;
+  color:var(--green); margin:0 0 6px;
+}
+.eyebrow img{width:26px; opacity:.9}
+h1,h2,h3{font-family:"Baloo 2","Quicksand",sans-serif; text-transform:lowercase; text-wrap:balance; line-height:1.08}
+h2{font-size:clamp(2.1rem,5vw,3.1rem); font-weight:800; color:var(--deep); margin:0 0 14px}
+@keyframes popin{0%{transform:scale(.94) rotate(-1.5deg)}60%{transform:scale(1.03) rotate(.6deg)}100%{transform:scale(1) rotate(0)}}
+h2.pop{animation:popin .55s ease}
+.center{text-align:center}
+.sub{color:var(--muted); font-size:.98rem; max-width:58ch}
+.center .sub,.sub.center{margin-inline:auto}
+
+/* ---------- hero ---------- */
+.hero{position:relative; overflow:clip}
+.hero .wrap{position:relative; padding-block:96px 48px; text-align:center}
+.hero h1{
+  font-size:clamp(2.6rem,7.2vw,4.7rem); font-weight:800; margin:0;
+  line-height:1.01; letter-spacing:.005em;
+}
+.hero h1 .l1{display:block; color:var(--deep)}
+.hero h1 .l2{display:block; color:var(--green)}
+.hero h1 .l3{display:block; color:var(--deep)}
+.hero p.lede{
+  max-width:46ch; margin:24px auto 44px; font-size:1.12rem; color:var(--ink); font-weight:600;
+}
+.hero .ctas{display:flex; gap:14px; justify-content:center; flex-wrap:wrap}
+.floaty{position:absolute; animation:bob 5s ease-in-out infinite; filter:drop-shadow(0 8px 14px rgba(60,79,53,.18)); cursor:pointer; z-index:1}
+.floaty .par{display:block; transition:transform .3s ease}
+.floaty img{display:block; width:100%}
+.floaty.booped img{animation:boop .5s ease}
+@keyframes boop{0%{transform:rotate(0) scale(1)}30%{transform:rotate(-14deg) scale(1.15)}60%{transform:rotate(10deg) scale(.96)}100%{transform:rotate(0) scale(1)}}
+.f1{width:128px; left:1%; top:6%; --r:-10deg; animation-delay:0s}
+.f2{width:130px; right:4%; top:12%; --r:9deg; animation-delay:1.4s}
+.f3{width:120px; right:8%; bottom:16%; --r:-6deg; animation-delay:2.4s}
+.f4{width:100px; left:9%; bottom:10%; --r:6deg; animation-delay:3.2s}
+@keyframes bob{
+  0%,100%{transform:rotate(var(--r)) translateY(0)}
+  50%{transform:rotate(var(--r)) translateY(-12px)}
+}
+.spark{
+  position:absolute; width:12px; height:12px; border-radius:50%;
+  background:var(--green); pointer-events:none; opacity:.9;
+  animation:spark .7s ease-out forwards;
+}
+@keyframes spark{to{transform:translate(var(--dx),var(--dy)) scale(.2); opacity:0}}
+@media (max-width:860px){
+  .f1{width:92px; left:-2%; top:4%}
+  .f2{width:84px; right:-1%; top:6%}
+  .f3,.f4{display:none}
+  .hero .wrap{padding-block:72px 34px}
+}
+@media (max-width:377px){ .hero h1{font-size:calc(11.9vw - 4px)} }
+
+/* ---------- the pond (flavor parade) ---------- */
+.pond{background:var(--sage-soft); overflow:hidden; padding-block:20px 22px; cursor:grab; touch-action:pan-y; user-select:none; -webkit-user-select:none}
+.pond.dragging{cursor:grabbing}
+.pond-wave{display:block; width:100%; height:40px; margin-bottom:-1px}
+.school{display:flex; width:max-content; gap:56px; padding-inline:28px; will-change:transform}
+.pfish{width:96px; text-align:center; animation:bob 4.2s ease-in-out infinite; --r:0deg}
+.pfish:nth-child(odd){animation-delay:1.1s; --r:-3deg}
+.pfish:nth-child(3n){animation-delay:2.2s; --r:3deg}
+.pfish img{display:block; width:100%; pointer-events:none; -webkit-user-drag:none}
+.pfish span{
+  display:inline-block; margin-top:6px; font-weight:700; font-size:.7rem;
+  letter-spacing:.12em; text-transform:lowercase; color:var(--deep);
+}
+@media (max-width:760px){ .pfish{width:68px} .school{gap:36px} }
+
+/* ---------- crack open ---------- */
+.crack-sec .wrap{padding-block:80px 70px}
+.crack{
+  position:relative; width:min(460px,84vw); aspect-ratio:1.483; margin:0 auto 70px;
+  filter:drop-shadow(0 16px 22px rgba(60,79,53,.2));
+}
+.crack .half{position:absolute; inset:0; width:100%; height:100%; transition:transform .12s linear; will-change:transform}
+.crack .left{
+  -webkit-mask:var(--cut-l) center/100% 100% no-repeat; mask:var(--cut-l) center/100% 100% no-repeat;
+  transform:translateX(calc(var(--p)*-13%)) rotate(calc(var(--p)*-4deg)); transform-origin:30% 70%;
+}
+.crack .right{
+  -webkit-mask:var(--cut-r) center/100% 100% no-repeat; mask:var(--cut-r) center/100% 100% no-repeat;
+  transform:translateX(calc(var(--p)*13%)) rotate(calc(var(--p)*4deg)); transform-origin:70% 70%;
+}
+.crack{
+  --cut-l:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath fill='black' d='M0 0H53C47 18 57 36 50 54C45 68 54 84 49 100H0Z'/%3E%3C/svg%3E");
+  --cut-r:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath fill='black' d='M53 0H100V100H49C54 84 45 68 50 54C57 36 47 18 53 0Z'/%3E%3C/svg%3E");
+}
+.filling{
+  position:absolute; left:50%; top:50%; width:31%; height:auto;
+  transform:translate(-50%,-44%) rotate(-7deg) scale(calc(.3 + var(--p)*.7));
+  opacity:var(--p); transition:transform .12s linear, opacity .12s linear;
+}
+.crumb{
+  position:absolute; left:var(--x); top:var(--y); width:var(--s); height:calc(var(--s)*.82);
+  border-radius:45% 55% 50% 50% / 55% 45% 55% 45%; background:var(--c);
+  opacity:var(--p); transition:transform .12s linear, opacity .12s linear;
+  transform:translate(calc(var(--dx)*var(--p)), calc(var(--dy)*var(--p))) rotate(calc(var(--rot)*var(--p)));
+}
+.steam{
+  position:absolute; left:50%; top:-22%; width:34%; transform:translateX(-50%);
+  opacity:calc(var(--p)*.9); fill:none; stroke:var(--sage); stroke-width:4; stroke-linecap:round;
+  animation:steam 2.8s ease-in-out infinite;
+}
+@keyframes steam{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-6px)}}
+.cracklines{
+  position:absolute; inset:-6% 0; width:100%; height:112%; pointer-events:none;
+  fill:none; stroke:#8f6d3c; stroke-width:3.2; stroke-linecap:round;
+  opacity:calc(4 * var(--p) * (1 - var(--p)));
+  transform:scale(calc(.7 + var(--p)*.5)); transform-origin:50% 50%;
+  transition:opacity .12s linear, transform .12s linear;
+}
+.cracklines .zig{stroke-width:2.4; opacity:.85}
+.crack-sec h2{margin-top:0}
+.crack-sec .eyebrow,.crack-sec h2,.crack-sec .sub{position:relative; z-index:1}
+
+/* ---------- about ---------- */
+.about .wrap{padding-block:30px 70px}
+.about-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:48px; align-items:center}
+.about-grid > *{min-width:0}
+.about h2{margin-top:0}
+.about p{margin:0 0 16px}
+.about .photo{border-radius:26px; box-shadow:var(--shadow); transform:rotate(1.4deg); border:6px solid var(--card); transition:transform .3s ease}
+.about .photo:hover{transform:rotate(0) scale(1.015)}
+.values{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:26px}
+.value{
+  background:var(--card); border:2px solid var(--sage-soft); border-radius:18px;
+  padding:16px 14px; text-align:center; transition:transform .2s ease;
+}
+.value:hover{transform:translateY(-3px) rotate(-.5deg)}
+.value b{
+  display:block; font-family:"Baloo 2",sans-serif; font-weight:700; font-size:1.02rem;
+  color:var(--deep); text-transform:lowercase; line-height:1.2; margin-bottom:6px;
+}
+.value small{color:var(--muted); font-weight:600; font-size:.8rem; line-height:1.45; display:block}
+@media (max-width:860px){
+  .about-grid{grid-template-columns:1fr}
+}
+@media (max-width:560px){ .values{grid-template-columns:1fr 1fr} .value:last-child{grid-column:1/-1} }
+
+/* ---------- wavy divider ---------- */
+.wave{display:block; width:100%; height:48px}
+
+/* ---------- taiyaki ---------- */
+.menu-sec .wrap{padding-block:80px}
+.fish-grid{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:30px 18px; margin-top:44px;
+}
+.fish{text-align:center; position:relative; -webkit-tap-highlight-color:transparent}
+.fish img{width:min(150px,80%); transition:transform .2s ease}
+.fish:hover img{transform:rotate(-7deg) scale(1.08)}
+.fish b{
+  display:block; margin-top:10px; font-weight:700; font-size:.86rem;
+  letter-spacing:.16em; text-transform:lowercase; color:var(--deep);
+}
+.fish.b1 img,.fish.b2 img,.fish.b3 img{
+  -webkit-mask:var(--bite) center/100% 100% no-repeat;
+  mask:var(--bite) center/100% 100% no-repeat;
+}
+.fish.b1{--bite:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath fill='black' fill-rule='evenodd' d='M0 0H100V100H0Z M17 18a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z'/%3E%3C/svg%3E")}
+.fish.b2{--bite:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath fill='black' fill-rule='evenodd' d='M0 0H100V100H0Z M17 18a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z M44 30a12 12 0 1 0 24 0a12 12 0 1 0 -24 0Z'/%3E%3C/svg%3E")}
+.fish.b3{--bite:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath fill='black' fill-rule='evenodd' d='M0 0H100V100H0Z M17 18a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z M44 30a12 12 0 1 0 24 0a12 12 0 1 0 -24 0Z M4 44a11 11 0 1 0 22 0a11 11 0 1 0 -22 0Z'/%3E%3C/svg%3E")}
+.fish.respawn img{animation:respawn .5s ease}
+@keyframes respawn{0%{transform:scale(0) rotate(-20deg)}70%{transform:scale(1.12) rotate(4deg)}100%{transform:scale(1)}}
+.nom{
+  position:absolute; top:-6px; right:4%; background:var(--deep); color:var(--cream);
+  font-family:"Baloo 2",sans-serif; font-weight:700; font-size:.85rem;
+  padding:4px 12px 6px; border-radius:999px; pointer-events:none;
+  animation:nom .9s ease forwards; white-space:nowrap; z-index:2;
+}
+@keyframes nom{0%{opacity:0; transform:translateY(6px) scale(.7)}20%{opacity:1; transform:translateY(0) scale(1)}75%{opacity:1}100%{opacity:0; transform:translateY(-10px)}}
+@media (max-width:700px){ .fish-grid{grid-template-columns:repeat(2,1fr); gap:26px 10px} }
+
+/* ---------- soft serve flavor grid ---------- */
+.swirl-sec{background:var(--sage-soft)}
+.swirl-sec .wrap{padding-block:80px}
+.row-label{
+  text-align:center; font-family:"Quicksand",sans-serif; font-weight:700; font-size:.82rem;
+  letter-spacing:.24em; text-transform:lowercase; color:var(--green); margin:44px 0 6px;
+}
+.serve-toggle{
+  display:flex; justify-content:center; gap:6px; margin:30px auto 0; width:max-content; max-width:100%;
+  background:var(--card); border:2.5px solid var(--sage); border-radius:999px; padding:5px;
+}
+.serve-toggle button{
+  font-family:"Baloo 2",sans-serif; font-weight:700; font-size:.98rem; text-transform:lowercase;
+  padding:7px 20px 9px; border-radius:999px; color:var(--deep); transition:background .15s ease, color .15s ease;
+}
+.serve-toggle button[aria-pressed="true"]{background:var(--deep); color:var(--cream)}
+.serve-hint{text-align:center; color:var(--muted); font-weight:600; font-size:.8rem; letter-spacing:.06em; margin:10px 0 0; min-height:1.4em}
+.cups-row{display:flex; flex-wrap:wrap; justify-content:center; gap:26px 40px; margin-top:16px}
+.cupcard{text-align:center; -webkit-tap-highlight-color:transparent; cursor:pointer}
+.cupcard .art{position:relative; display:inline-block; transition:transform .2s ease}
+.cupcard .art img.cup{height:132px; width:auto; display:block}
+.cupcard .art img.cone{
+  position:absolute; left:40%; top:-20%; height:66%; width:auto;
+  transform:rotate(10deg) scaleY(-1) rotate(-100deg) scale(0); transform-origin:50% 55%; opacity:0;
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1), opacity .2s ease;
+  filter:drop-shadow(-2px 3px 3px rgba(60,79,53,.22));
+}
+.cone-on .cupcard .art img.cone{transform:rotate(10deg) scaleY(-1) rotate(-100deg) scale(1); opacity:1}
+.cupcard:hover .art{transform:rotate(-5deg) scale(1.07)}
+.cupcard.bounce .art{animation:cuppop .45s ease}
+@keyframes cuppop{0%{transform:scale(.72) translateY(12px)}65%{transform:scale(1.07)}100%{transform:scale(1)}}
+.cupcard b{
+  display:block; margin-top:10px; font-weight:700; font-size:.86rem;
+  letter-spacing:.14em; text-transform:lowercase; color:var(--deep);
+}
+.cupcard small{display:block; color:var(--muted); font-weight:600; font-size:.74rem; letter-spacing:.1em; margin-top:2px}
+.combos .cupcard .art img.cup{height:160px}
+.swirl-note{margin:40px auto 0; text-align:center}
+
+/* ---------- drinks ---------- */
+.drinks .wrap{padding-block:80px}
+.drink-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px 44px; margin-top:38px}
+.drink{padding:12px 0 12px 2px; border-bottom:1.5px dashed var(--sage-soft); min-width:0; transition:transform .2s ease}
+.drink:hover{transform:translateX(7px)}
+.drink b{
+  font-family:"Baloo 2",sans-serif; font-weight:700; font-size:1.08rem;
+  color:var(--deep); text-transform:lowercase; letter-spacing:.02em;
+}
+.drink small{display:block; color:var(--muted); font-weight:600; font-size:.82rem; letter-spacing:.04em}
+.milk-note{margin-top:26px; text-align:center; color:var(--muted); font-size:.85rem; font-weight:600; letter-spacing:.06em}
+@media (max-width:700px){ .drink-grid{grid-template-columns:1fr} }
+
+/* ---------- merch ---------- */
+.merch-sec{background:var(--card)}
+.merch-sec .wrap{padding-block:80px}
+.merch-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:44px}
+.flip{
+  position:relative; aspect-ratio:1/1.08; perspective:1200px; cursor:pointer; text-align:center;
+  -webkit-tap-highlight-color:transparent; border-radius:20px;
+}
+.flip.m-photo{grid-column:span 2; grid-row:span 2; aspect-ratio:auto}
+.flip .inner{position:absolute; inset:0; transform-style:preserve-3d; transition:transform .65s cubic-bezier(.35,.1,.25,1)}
+.flip:hover .inner{transform:rotateY(-9deg)}
+.flip.flipped .inner{transform:rotateY(180deg)}
+.flip.flipped:hover .inner{transform:rotateY(171deg)}
+.flip .face{
+  position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden;
+  border-radius:20px; border:2px solid var(--sage-soft); background:var(--cream); overflow:hidden;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:22px 18px 20px;
+}
+.flip .face.back{transform:rotateY(180deg)}
+.flip .face.pic{padding:0; background:#f6f6f0}
+.flip .face.pic img{width:100%; height:100%; object-fit:cover; object-position:top center; display:block}
+.flip .face.pic .tag{
+  position:absolute; left:12px; bottom:10px; background:var(--deep); color:var(--cream);
+  font-family:"Baloo 2",sans-serif; font-weight:700; text-transform:lowercase;
+  border-radius:999px; padding:4px 14px 6px; font-size:.9rem;
+}
+.flip .face img.smiley{width:34px; margin-bottom:6px}
+.flip .face .name{
+  display:block; font-family:"Baloo 2",sans-serif; font-weight:700; font-size:1.05rem;
+  color:var(--deep); text-transform:lowercase; line-height:1.2;
+}
+.flip .face .desc{display:block; color:var(--muted); font-weight:600; font-size:.8rem; line-height:1.45; letter-spacing:.02em; max-width:24ch}
+.flip .face.txt .desc.short{letter-spacing:.08em; font-size:.78rem}
+.flip .hint{
+  position:absolute; right:10px; top:10px; width:24px; height:24px; border-radius:50%;
+  background:var(--sage-soft); color:var(--deep); font-size:13px; line-height:24px; font-weight:700;
+}
+.flip .face.pic .hint{background:rgba(246,246,240,.9)}
+.flip-hint{text-align:center; color:var(--muted); font-weight:600; font-size:.8rem; letter-spacing:.06em; margin:12px 0 0}
+.merch-note{margin-top:28px; text-align:center}
+@media (max-width:860px){ .merch-grid{grid-template-columns:repeat(2,1fr)} .flip.m-photo{grid-column:span 2; grid-row:auto; aspect-ratio:1.45} }
+
+/* ---------- catering ---------- */
+.catering{background:var(--band); color:var(--band-ink)}
+.catering .wrap{padding-block:76px; text-align:center}
+.catering h2{color:var(--band-ink)}
+.catering .eyebrow{color:var(--band-ink); opacity:.85}
+.catering p{max-width:52ch; margin:0 auto 30px; font-weight:600}
+
+/* ---------- visit ---------- */
+.visit .wrap{padding-block:90px}
+.visit-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center}
+.visit-grid > *{min-width:0}
+.visit .photo{border-radius:26px; box-shadow:var(--shadow); transform:rotate(-1.4deg); border:6px solid var(--card); transition:transform .3s ease}
+.visit .photo:hover{transform:rotate(0) scale(1.015)}
+.visit h2{margin-top:0}
+.visit .big-place{
+  font-family:"Baloo 2",sans-serif; font-weight:800; font-size:clamp(1.5rem,3vw,2rem);
+  color:var(--green); text-transform:lowercase; margin:4px 0 14px; line-height:1.15;
+}
+.visit p{margin:0 0 16px}
+.visit .ctas{display:flex; gap:14px; flex-wrap:wrap; margin-top:24px}
+@media (max-width:860px){ .visit-grid{grid-template-columns:1fr} }
+
+/* ---------- footer ---------- */
+footer{background:var(--dark-band); color:#e8ecdc}
+footer .wrap{padding-block:60px 46px; text-align:center}
+footer .fsmile{width:44px; display:inline-block; margin-bottom:18px; cursor:pointer; transition:transform .2s ease}
+footer .fsmile:hover{transform:rotate(-10deg) scale(1.1)}
+footer nav{display:flex; gap:22px; justify-content:center; flex-wrap:wrap; margin:18px 0 26px}
+footer nav a{
+  color:#cdd6bf; text-decoration:none; font-weight:700; font-size:.8rem;
+  letter-spacing:.16em; text-transform:lowercase;
+}
+footer nav a:hover{color:#fff}
+footer .fine{color:#9aa58c; font-size:.78rem; font-weight:600; letter-spacing:.08em}
+
+/* ---------- scroll buddy + fish rain ---------- */
+#buddy{
+  position:fixed; right:10px; top:14vh; width:54px; z-index:40; pointer-events:none;
+  transition:top .5s ease, transform .5s ease; filter:drop-shadow(0 4px 8px rgba(60,79,53,.25));
+}
+#buddy img{display:block}
+@media (max-width:900px){ #buddy{display:none} }
+.rainfish{
+  position:fixed; top:-90px; width:64px; z-index:70; pointer-events:none;
+  left:var(--x); animation:fall var(--t) linear forwards; animation-delay:var(--d);
+}
+@keyframes fall{to{transform:translateY(115vh) rotate(var(--spin))}}
+
+@media (prefers-reduced-motion: reduce){
+  .floaty,.school,.pfish,h2.pop,.cupcard.bounce .art,.steam{animation:none !important}
+  .flip .inner{transition:none}
+  #buddy,.rainfish,.spark{display:none !important}
+  .btn:hover,.fish:hover img,.flip:hover .inner,.drink:hover,.value:hover,.cupcard:hover .art{transform:none}
+  html{scroll-behavior:auto}
+}
+:focus-visible{outline:3px solid var(--green); outline-offset:3px; border-radius:6px}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="soft boy home">
+      <img class="face only-light" src="img/face.svg" alt="">
+      <img class="face only-dark" src="img/face-white.svg" alt="">
+      <img class="wm only-light" src="img/wordmark.svg" alt="soft boy, taiyaki and soft serve">
+      <img class="wm only-dark" src="img/wordmark-white.svg" alt="soft boy, taiyaki and soft serve">
+    </a>
+    <a class="link" href="#about">about</a>
+    <a class="link" href="#menu">menu</a>
+    <a class="link" href="#merch">merch</a>
+    <a class="link" href="#catering">catering</a>
+    <a class="link" href="#visit">visit</a>
+    <a class="btn btn-solid" href="https://snackpass.co" target="_blank" rel="noopener">order online</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <button class="floaty f1 boopable" aria-label="boop the matcha taiyaki"><span class="par"><img src="img/fish-matcha.svg" alt=""></span></button>
+    <button class="floaty f2 boopable" aria-label="boop the taro taiyaki"><span class="par"><img src="img/fish-taro.svg" alt=""></span></button>
+    <button class="floaty f3 boopable" aria-label="boop the red bean taiyaki"><span class="par"><img src="img/fish-redbean.svg" alt=""></span></button>
+    <button class="floaty f4 boopable" aria-label="boop the ube soft serve"><span class="par"><img src="img/cup-ube.svg" alt=""></span></button>
+    <h1><span class="l1">fresh taiyaki</span><span class="l2">creamy soft serve</span><span class="l3">good matcha</span></h1>
+    <p class="lede">fresh mochi taiyaki + japanese-style soft serve + drinks, made to order from scratch with fresh locally-sourced ingredients.</p>
+    <div class="ctas">
+      <a class="btn btn-solid btn-big" href="https://snackpass.co" target="_blank" rel="noopener">order online</a>
+      <a class="btn btn-ghost btn-big" href="#menu">peek the menu</a>
+    </div>
+  </div>
+  <svg class="pond-wave" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 C180,40 360,0 540,12 C720,23 900,40 1080,28 C1260,17 1350,7 1440,17 L1440,40 L0,40 Z" fill="var(--sage-soft)"/></svg>
+  <div class="pond" aria-label="our taiyaki flavors, swimming by: custard, red bean, taro, matcha, nutella, viet coffee, black sesame, oreo cream">
+    <div class="school" aria-hidden="true">
+      <div class="pfish"><img src="img/fish-custard.svg" alt=""><span>custard</span></div>
+      <div class="pfish"><img src="img/fish-redbean.svg" alt=""><span>red bean</span></div>
+      <div class="pfish"><img src="img/fish-taro.svg" alt=""><span>taro</span></div>
+      <div class="pfish"><img src="img/fish-matcha.svg" alt=""><span>matcha</span></div>
+      <div class="pfish"><img src="img/fish-nutella.svg" alt=""><span>nutella</span></div>
+      <div class="pfish"><img src="img/fish-vietcoffee.svg" alt=""><span>viet coffee</span></div>
+      <div class="pfish"><img src="img/fish-blacksesame.svg" alt=""><span>black sesame</span></div>
+      <div class="pfish"><img src="img/fish-oreo.svg" alt=""><span>oreo cream</span></div>
+      <div class="pfish"><img src="img/fish-custard.svg" alt=""><span>custard</span></div>
+      <div class="pfish"><img src="img/fish-redbean.svg" alt=""><span>red bean</span></div>
+      <div class="pfish"><img src="img/fish-taro.svg" alt=""><span>taro</span></div>
+      <div class="pfish"><img src="img/fish-matcha.svg" alt=""><span>matcha</span></div>
+      <div class="pfish"><img src="img/fish-nutella.svg" alt=""><span>nutella</span></div>
+      <div class="pfish"><img src="img/fish-vietcoffee.svg" alt=""><span>viet coffee</span></div>
+      <div class="pfish"><img src="img/fish-blacksesame.svg" alt=""><span>black sesame</span></div>
+      <div class="pfish"><img src="img/fish-oreo.svg" alt=""><span>oreo cream</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="crack-sec">
+  <div class="wrap center">
+    <div class="crack" id="crack" style="--p:0" role="img" aria-label="a taiyaki cracking open to reveal golden custard inside">
+      <svg class="steam" viewBox="0 0 120 60" aria-hidden="true">
+        <path d="M22 56c-8-10 8-16 0-28 -6-9 4-14 2-24"/>
+        <path d="M60 58c-9-11 9-17 0-30 -6-9 5-15 2-26"/>
+        <path d="M98 56c-8-10 8-16 0-28 -6-9 4-14 2-24"/>
+      </svg>
+      <svg class="cracklines" viewBox="0 0 148 112" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <!-- top burst -->
+        <path d="M70 14L63 5"/><path d="M78 11L78 1"/><path d="M86 14L93 5"/><path d="M62 20L52 15"/><path d="M94 20L104 15"/>
+        <!-- bottom burst -->
+        <path d="M66 98L59 107"/><path d="M73 101L73 111"/><path d="M80 98L87 107"/><path d="M58 92L48 97"/><path d="M88 92L98 97"/>
+        <!-- side crackle -->
+        <path d="M36 50L26 47"/><path d="M38 60L28 64"/><path d="M112 50L122 47"/><path d="M110 60L120 64"/>
+        <!-- little fissures on the shell -->
+        <path class="zig" d="M60 36l4 5-3 5 4 5"/><path class="zig" d="M96 70l-4 5 3 5-4 5"/>
+      </svg>
+      <svg class="filling" viewBox="0 0 100 120" aria-hidden="true">
+        <path fill="#f3cc66" d="M50 6C76 6 92 26 92 50C92 72 87 92 79 104C71 116 29 116 21 104C13 92 8 72 8 50C8 26 24 6 50 6Z"/>
+        <ellipse fill="#fbe39a" cx="33" cy="33" rx="12" ry="7.5" transform="rotate(-28 33 33)"/>
+        <image href="img/filling-face.svg" x="30" y="57" width="40" height="21.3"/>
+      </svg>
+      <span class="crumb" style="--x:46%;--y:64%;--s:11px;--c:#ccad83;--dx:-22px;--dy:102px;--rot:160deg" aria-hidden="true"></span>
+      <span class="crumb" style="--x:52%;--y:68%;--s:9px;--c:#ccad83;--dx:16px;--dy:107px;--rot:-220deg" aria-hidden="true"></span>
+      <span class="crumb" style="--x:49%;--y:72%;--s:13px;--c:#ccad83;--dx:-85px;--dy:122px;--rot:90deg" aria-hidden="true"></span>
+      <span class="crumb" style="--x:44%;--y:74%;--s:8px;--c:#ccad83;--dx:98px;--dy:106px;--rot:-140deg" aria-hidden="true"></span>
+      <span class="crumb" style="--x:42%;--y:76%;--s:10px;--c:#ccad83;--dx:-100px;--dy:190px;--rot:200deg" aria-hidden="true"></span>
+      <span class="crumb" style="--x:50%;--y:60%;--s:7px;--c:#ccad83;--dx:120px;--dy:254px;--rot:-90deg" aria-hidden="true"></span>
+      <span class="crumb" style="--x:47%;--y:80%;--s:9px;--c:#ccad83;--dx:-16px;--dy:150px;--rot:120deg" aria-hidden="true"></span>
+      <span class="crumb" style="--x:56%;--y:82%;--s:7px;--c:#ccad83;--dx:150px;--dy:174px;--rot:-60deg" aria-hidden="true"></span>
+      <span class="crumb" style="--x:48%;--y:66%;--s:6px;--c:#ccad83;--dx:104px;--dy:91px;--rot:75deg" aria-hidden="true"></span>
+      <span class="crumb" style="--x:51%;--y:70%;--s:8px;--c:#ccad83;--dx:0px;--dy:155px;--rot:-30deg" aria-hidden="true"></span>
+      <img class="half left" src="img/plain.svg" alt="">
+      <img class="half right" src="img/plain.svg" alt="">
+    </div>
+    <p class="eyebrow"><img src="img/smile.svg" alt="">fresh off the iron</p>
+    <h2>crispy outside. chewy inside. filled to the tail.</h2>
+    <p class="sub center">our signature mochi taiyaki batter cooked to order and stuffed with house-made custard, or red bean, taro, matcha, and more.</p>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <p class="eyebrow" style="justify-content:flex-start"><img src="img/smile.svg" alt="">who we are</p>
+        <h2>hi, we're soft boy</h2>
+        <p>we're a little taiyaki and soft serve shop in fairfax, virginia. every taiyaki is made to order from scratch: crispy on the outside, chewy mochi inside, with locally-sourced ingredients and fillings we obsess over.</p>
+        <p>our soft serve is ultra rich and creamy, with asian-inspired flavors and that dense, silky consistency you find in japan. come for the fish, stay for the swirl.</p>
+        <div class="values">
+          <div class="value"><b>made to order</b><small>every fish comes off the iron hot, just for you</small></div>
+          <div class="value"><b>from scratch</b><small>house-made batter + fillings, locally-sourced ingredients</small></div>
+          <div class="value"><b>japanese-style</b><small>dense, silky soft serve. ultra rich, ultra creamy</small></div>
+        </div>
+      </div>
+      <img class="photo" src="img/store-order.jpg" alt="inside the soft boy shop: a glowing green soft boy neon sign above the order counter">
+    </div>
+  </div>
+</section>
+
+<section class="menu-sec" id="menu">
+  <div class="wrap">
+    <p class="eyebrow"><img src="img/smile.svg" alt="">the menu</p>
+    <h2 class="center">taiyaki</h2>
+    <p class="sub center">crispy, chewy mochi taiyaki made to order with your choice of filling. go on, click or tap to take a bite!</p>
+    <div class="fish-grid">
+      <button class="fish" data-name="custard"><img src="img/fish-custard.svg" alt="cream-colored custard taiyaki, tap for a bite"><b>custard</b></button>
+      <button class="fish" data-name="red bean"><img src="img/fish-redbean.svg" alt="deep red bean taiyaki, tap for a bite"><b>red bean</b></button>
+      <button class="fish" data-name="taro"><img src="img/fish-taro.svg" alt="lavender taro taiyaki, tap for a bite"><b>taro</b></button>
+      <button class="fish" data-name="matcha"><img src="img/fish-matcha.svg" alt="green matcha taiyaki, tap for a bite"><b>matcha</b></button>
+      <button class="fish" data-name="nutella"><img src="img/fish-nutella.svg" alt="chocolate nutella taiyaki, tap for a bite"><b>nutella</b></button>
+      <button class="fish" data-name="viet coffee"><img src="img/fish-vietcoffee.svg" alt="light brown viet coffee taiyaki, tap for a bite"><b>viet coffee</b></button>
+      <button class="fish" data-name="black sesame"><img src="img/fish-blacksesame.svg" alt="gray black sesame taiyaki, tap for a bite"><b>black sesame</b></button>
+      <button class="fish" data-name="oreo cream"><img src="img/fish-oreo.svg" alt="dark oreo cream taiyaki, tap for a bite"><b>oreo cream</b></button>
+    </div>
+  </div>
+</section>
+
+<svg class="wave" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0,24 C180,48 360,0 540,14 C720,28 900,48 1080,34 C1260,20 1350,8 1440,20 L1440,48 L0,48 Z" fill="var(--sage-soft)"/></svg>
+
+<section class="swirl-sec" id="swirl">
+  <div class="wrap">
+    <p class="eyebrow"><img src="img/smile.svg" alt="">the swirl</p>
+    <h2 class="center">soft serve</h2>
+    <p class="sub center">japanese-inspired, ultra-creamy soft serve made with organic local ingredients. here's the whole lineup</p>
+    <div class="serve-toggle" role="group" aria-label="how do you want it">
+      <button id="tgCup" aria-pressed="true" data-mode="cup">cup</button>
+      <button id="tgCone" aria-pressed="false" data-mode="cone">+ taiyaki cone</button>
+    </div>
+    <p class="serve-hint" id="serveHint">just the swirl, in our smiley cup</p>
+    <p class="row-label">this week's flavors</p>
+    <div class="cups-row">
+      <button class="cupcard"><span class="art"><img class="cup" src="img/cup-milk.svg" alt="white milk soft serve in a smiling green cup"><img class="cone" src="img/cone.svg" alt=""></span><b>milk</b></button>
+      <button class="cupcard"><span class="art"><img class="cup" src="img/cup-matcha.svg" alt="green matcha soft serve cup"><img class="cone" src="img/cone.svg" alt=""></span><b>matcha</b></button>
+      <button class="cupcard"><span class="art"><img class="cup" src="img/cup-ube.svg" alt="purple ube soft serve cup"><img class="cone" src="img/cone.svg" alt=""></span><b>ube</b></button>
+      <button class="cupcard"><span class="art"><img class="cup" src="img/cup-thaitea.svg" alt="orange thai tea soft serve cup"><img class="cone" src="img/cone.svg" alt=""></span><b>thai tea</b></button>
+      <button class="cupcard"><span class="art"><img class="cup" src="img/cup-coffee.svg" alt="brown coffee soft serve cup"><img class="cone" src="img/cone.svg" alt=""></span><b>coffee</b></button>
+    </div>
+    <p class="row-label">the signature swirls</p>
+    <div class="cups-row combos">
+      <button class="cupcard"><span class="art"><img class="cup" src="img/cup-matchamilk.svg" alt="green and white matcha milk swirl cup"><img class="cone" src="img/cone.svg" alt=""></span><b>matcha milk</b><small>milk + matcha</small></button>
+      <button class="cupcard"><span class="art"><img class="cup" src="img/cup-thaicoffee.svg" alt="orange and brown thai coffee swirl cup"><img class="cone" src="img/cone.svg" alt=""></span><b>thai coffee</b><small>thai tea + coffee</small></button>
+      <button class="cupcard"><span class="art"><img class="cup" src="img/cup-ubecoffee.svg" alt="purple and brown ube coffee swirl cup"><img class="cone" src="img/cone.svg" alt=""></span><b>ube coffee</b><small>ube + coffee</small></button>
+    </div>
+    <p class="sub swirl-note">in a cup, with a taiyaki cone on top, or dropped in an affogato. every flavor, any way you like it.</p>
+  </div>
+</section>
+
+<svg class="wave" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true" style="transform:scaleY(-1)"><path d="M0,24 C180,48 360,0 540,14 C720,28 900,48 1080,34 C1260,20 1350,8 1440,20 L1440,48 L0,48 Z" fill="var(--sage-soft)"/></svg>
+
+<section class="drinks">
+  <div class="wrap">
+    <p class="eyebrow"><img src="img/smile.svg" alt="">sips</p>
+    <h2 class="center">drinks</h2>
+    <p class="sub center">signature tea and latte combinations with your choice of milk</p>
+    <div class="drink-grid">
+      <div class="drink"><b>cold brew coffee latte</b><small>signature softboy coffee blend + organic whole milk</small></div>
+      <div class="drink"><b>affogato latte</b><small>softboy coffee blend + fresh milk soft serve</small></div>
+      <div class="drink"><b>strawberry matcha latte</b><small>ceremonial matcha + fresh strawberry jam + choice of milk</small></div>
+      <div class="drink"><b>ceremonial matcha latte</b><small>ceremonial matcha + choice of milk</small></div>
+      <div class="drink"><b>strawberry hojicha latte</b><small>roasted hojicha + fresh strawberry jam + choice of milk</small></div>
+      <div class="drink"><b>roasted hojicha latte</b><small>roasted hojicha + choice of milk</small></div>
+      <div class="drink"><b>matcha kuromitsu latte</b><small>japanese kuromitsu brown sugar + matcha + organic whole milk</small></div>
+      <div class="drink"><b>kuromitsu latte</b><small>japanese kuromitsu brown sugar + organic whole milk</small></div>
+      <div class="drink"><b>jasmine tea (iced or milk)</b><small>premium jasmine-scented tea + choice of milk</small></div>
+      <div class="drink"><b>black sesame latte</b><small>black sesame paste + organic whole milk</small></div>
+      <div class="drink"><b>tencha milk tea</b><small>loose leaf matcha tea + choice of milk</small></div>
+      <div class="drink"><b>strawberry oat latte</b><small>fresh strawberry jam + califia farms oatmilk</small></div>
+      <div class="drink"><b>bancha milk tea</b><small>loose leaf hojicha tea + choice of milk</small></div>
+    </div>
+    <p class="milk-note">milk options: organic whole milk · califia farms oatmilk · 2% lactaid</p>
+  </div>
+</section>
+
+<section class="merch-sec" id="merch">
+  <div class="wrap">
+    <p class="eyebrow"><img src="img/smile.svg" alt="">take us home</p>
+    <h2 class="center">merch</h2>
+    <p class="sub center">little soft boy things to take home. find them at the shop</p>
+    <p class="flip-hint">tap a card to flip it over</p>
+    <div class="merch-grid">
+      <button class="flip m-photo" type="button" aria-pressed="false" aria-label="shirts, tap to flip the card">
+        <span class="inner"><span class="face front pic"><img src="img/shirt.jpg" alt="sage green soft boy work shirt with an embroidered soft boy patch"><span class="tag">shirts</span><span class="hint" aria-hidden="true">&#8635;</span></span><span class="face back txt"><img class="smiley" src="img/smile.svg" alt=""><span class="name">shirts</span><span class="desc">our sage work shirt with the embroidered soft boy patch. the same one the crew wears.</span><span class="hint" aria-hidden="true">&#8635;</span></span></span>
+      </button>
+      <button class="flip" type="button" aria-pressed="false" aria-label="stickers, tap to flip the card">
+        <span class="inner"><span class="face front pic"><img src="img/merch-stickers.png" alt="sticker sheet of soft boy faces, taiyaki and a matcha cup"><span class="tag">stickers</span><span class="hint" aria-hidden="true">&#8635;</span></span><span class="face back txt"><img class="smiley" src="img/smile.svg" alt=""><span class="name">stickers</span><span class="desc">die-cut soft boy faces and fish. for laptops, water bottles, and wherever else.</span><span class="hint" aria-hidden="true">&#8635;</span></span></span>
+      </button>
+      <button class="flip" type="button" aria-pressed="false" aria-label="keychains, tap to flip the card">
+        <span class="inner"><span class="face front txt"><img class="smiley" src="img/smile.svg" alt=""><span class="name">keychains</span><span class="desc">a little taiyaki for your keys. hangs off a backpack too.</span><span class="hint" aria-hidden="true">&#8635;</span></span><span class="face back pic"><img src="img/merch-keychains.png" alt="taiyaki keychain on a silver ring with a tan soft boy tag"><span class="tag">keychains</span><span class="hint" aria-hidden="true">&#8635;</span></span></span>
+      </button>
+      <button class="flip" type="button" aria-pressed="false" aria-label="plushies, tap to flip the card">
+        <span class="inner"><span class="face front txt"><img class="smiley" src="img/smile.svg" alt=""><span class="name">plushies</span><span class="desc">squishy taiyaki to hug. for your bed, your desk, your car.</span><span class="hint" aria-hidden="true">&#8635;</span></span><span class="face back pic"><img src="img/merch-plushies.png" alt="two squishy taiyaki plushies, custard and matcha"><span class="tag">plushies</span><span class="hint" aria-hidden="true">&#8635;</span></span></span>
+      </button>
+      <button class="flip" type="button" aria-pressed="false" aria-label="mini tote bags, tap to flip the card">
+        <span class="inner"><span class="face front pic"><img src="img/merch-tote.png" alt="cream canvas mini tote with the soft boy face and wordmark"><span class="tag">mini tote bags</span><span class="hint" aria-hidden="true">&#8635;</span></span><span class="face back txt"><img class="smiley" src="img/smile.svg" alt=""><span class="name">mini tote bags</span><span class="desc">the right size for a box of taiyaki and not much else.</span><span class="hint" aria-hidden="true">&#8635;</span></span></span>
+      </button>
+      <button class="flip" type="button" aria-pressed="false" aria-label="matcha tins, tap to flip the card">
+        <span class="inner"><span class="face front txt"><img class="smiley" src="img/smile.svg" alt=""><span class="name">matcha tins</span><span class="desc">the matcha we whisk in the shop, in a tin for home.</span><span class="hint" aria-hidden="true">&#8635;</span></span><span class="face back pic"><img src="img/merch-tin.png" alt="deep green matcha tin with a cream soft boy label"><span class="tag">matcha tins</span><span class="hint" aria-hidden="true">&#8635;</span></span></span>
+      </button>
+      <button class="flip" type="button" aria-pressed="false" aria-label="mugs, tap to flip the card">
+        <span class="inner"><span class="face front pic"><img src="img/merch-mug.png" alt="cream mug with a sage handle and the soft boy face"><span class="tag">mugs</span><span class="hint" aria-hidden="true">&#8635;</span></span><span class="face back txt"><img class="smiley" src="img/smile.svg" alt=""><span class="name">mugs</span><span class="desc">for your morning matcha. or coffee. we don't judge.</span><span class="hint" aria-hidden="true">&#8635;</span></span></span>
+      </button>
+      <button class="flip" type="button" aria-pressed="false" aria-label="hats, tap to flip the card">
+        <span class="inner"><span class="face front txt"><img class="smiley" src="img/smile.svg" alt=""><span class="name">hats</span><span class="desc">a soft boy cap for sunny days and bad hair days.</span><span class="hint" aria-hidden="true">&#8635;</span></span><span class="face back pic"><img src="img/merch-hat.png" alt="sage green cap with a dark green brim and a tiny embroidered smile"><span class="tag">hats</span><span class="hint" aria-hidden="true">&#8635;</span></span></span>
+      </button>
+      <button class="flip" type="button" aria-pressed="false" aria-label="handmade lamps, tap to flip the card">
+        <span class="inner"><span class="face front pic"><img src="img/merch-lamp.png" alt="glowing taiyaki night light on a small wooden base"><span class="tag">handmade lamps</span><span class="hint" aria-hidden="true">&#8635;</span></span><span class="face back txt"><img class="smiley" src="img/smile.svg" alt=""><span class="name">handmade lamps</span><span class="desc">little lamps made by hand, one at a time. for your glow.</span><span class="hint" aria-hidden="true">&#8635;</span></span></span>
+      </button>
+    </div>
+    <p class="sub center merch-note">small batches, made with love. if you see something you like, grab it while it's there.</p>
+  </div>
+</section>
+
+<section class="catering" id="catering">
+  <div class="wrap">
+    <p class="eyebrow"><img src="img/smile-white.svg" alt="">we cater</p>
+    <h2>softboy, but at your thing</h2>
+    <p>school events, birthdays, pop-ups, office parties, weddings: we'll bring fresh taiyaki and our signature drinks to you. tell us about your event and we'll build something sweet together.</p>
+    <a class="btn btn-cream" href="https://instagram.com/softboysoftserve" target="_blank" rel="noopener">dm us to book</a>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="wrap">
+    <div class="visit-grid">
+      <img class="photo" src="img/store-benches.jpg" alt="soft boy dining room with sage green chairs, wood tables, and glowing globe lights">
+      <div>
+        <p class="eyebrow" style="justify-content:flex-start"><img src="img/smile.svg" alt="">come say hi</p>
+        <h2>find us in fairfax</h2>
+        <p class="big-place">4030 gateway dr<br>fairfax, va 22030</p>
+        <p>we're putting the finishing touches on the shop. opening day and hours are coming soon. follow along on instagram for sneak peeks and the big announcement.</p>
+        <p>online ordering for pickup will run through snackpass once we open.</p>
+        <div class="ctas">
+          <a class="btn btn-solid" href="https://www.google.com/maps/search/?api=1&amp;query=4030+Gateway+Dr+Fairfax+VA+22030" target="_blank" rel="noopener">get directions</a>
+          <a class="btn btn-ghost" href="https://instagram.com/softboysoftserve" target="_blank" rel="noopener">follow @softboysoftserve</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img class="fsmile" id="fsmile" src="img/face-white.svg" alt="soft boy face, click me a few times" title="click me a few times…">
+    <nav>
+      <a href="#about">about</a>
+      <a href="#menu">menu</a>
+      <a href="#merch">merch</a>
+      <a href="#catering">catering</a>
+      <a href="#visit">visit</a>
+      <a href="https://instagram.com/softboysoftserve" target="_blank" rel="noopener">instagram</a>
+    </nav>
+    <p class="fine">© 2026 soft boy · taiyaki and soft serve · 4030 gateway dr, fairfax, va 22030</p>
+  </div>
+</footer>
+
+<div id="buddy" aria-hidden="true"><img src="img/plain.svg" alt=""></div>
+
+<script>
+(function(){
+  var rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* hero: boop + sparks */
+  document.querySelectorAll('.boopable').forEach(function(f){
+    f.addEventListener('click', function(){
+      f.classList.remove('booped'); void f.offsetWidth; f.classList.add('booped');
+      if(rm) return;
+      for(var i=0;i<4;i++){
+        var s=document.createElement('span'); s.className='spark';
+        s.style.left='50%'; s.style.top='40%';
+        s.style.setProperty('--dx',(Math.random()*120-60)+'px');
+        s.style.setProperty('--dy',(-40-Math.random()*70)+'px');
+        f.appendChild(s); setTimeout(function(el){return function(){el.remove()}}(s),750);
+      }
+    });
+  });
+
+  /* hero: gentle pointer parallax */
+  var hero=document.querySelector('.hero');
+  if(!rm && matchMedia('(pointer: fine)').matches){
+    hero.addEventListener('pointermove', function(e){
+      var r=hero.getBoundingClientRect();
+      var x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+      document.querySelectorAll('.floaty .par').forEach(function(p,i){
+        var d=(i%3+1)*6;
+        p.style.transform='translate('+(-x*d)+'px,'+(-y*d)+'px)';
+      });
+    });
+  }
+
+  /* pond: swims on its own, and you can drag, swipe or trackpad-scroll it */
+  var pond=document.querySelector('.pond'), school=pond&&pond.querySelector('.school');
+  if(pond&&school){
+    var fishEls=school.children, period=0, px=0, vel=0, drag=null, hover=false, lastTs=0;
+    function measure(){ period=fishEls.length>8 ? fishEls[8].offsetLeft-fishEls[0].offsetLeft : school.scrollWidth/2; }
+    measure(); addEventListener('resize',measure);
+    function tick(ts){
+      var dt=lastTs?Math.min(50,ts-lastTs):16; lastTs=ts;
+      if(!drag){
+        if(Math.abs(vel)>0.02){ px+=vel*dt; vel*=Math.pow(0.94,dt/16); }
+        else { vel=0; if(!rm&&!hover&&period>0) px+=period/60000*dt; }
+      }
+      if(period>0){ while(px>0) px-=period; while(px<=-period) px+=period; }
+      school.style.transform='translateX('+px.toFixed(2)+'px)';
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+    pond.addEventListener('pointerenter',function(e){ if(e.pointerType==='mouse') hover=true; });
+    pond.addEventListener('pointerleave',function(e){ if(e.pointerType==='mouse') hover=false; });
+    pond.addEventListener('pointerdown',function(e){
+      if(e.pointerType==='mouse'&&e.button!==0) return;
+      drag={x:e.clientX,t:performance.now()}; vel=0; pond.classList.add('dragging');
+      try{ pond.setPointerCapture(e.pointerId); }catch(err){}
+    });
+    pond.addEventListener('pointermove',function(e){
+      if(!drag) return;
+      var now=performance.now(), dx=e.clientX-drag.x, dt=now-drag.t;
+      px+=dx; vel=dt>0?Math.max(-3,Math.min(3,dx/dt)):0; drag.x=e.clientX; drag.t=now;
+    });
+    function endDrag(){ if(!drag) return; drag=null; pond.classList.remove('dragging'); if(Math.abs(vel)<0.05) vel=0; }
+    pond.addEventListener('pointerup',endDrag); pond.addEventListener('pointercancel',endDrag);
+    pond.addEventListener('wheel',function(e){
+      if(Math.abs(e.deltaX)>Math.abs(e.deltaY)){ e.preventDefault(); px-=e.deltaX; vel=0; }
+    },{passive:false});
+  }
+
+  /* crack open on scroll */
+  var crack=document.getElementById('crack');
+  function updCrack(){
+    if(rm){ crack.style.setProperty('--p','1'); return; }
+    var r=crack.getBoundingClientRect(), vh=innerHeight;
+    var p=(vh*0.95-(r.top+r.height*0.5))/(vh*0.42);
+    p=Math.max(0,Math.min(1,p));
+    crack.style.setProperty('--p',p.toFixed(3));
+  }
+  addEventListener('scroll',updCrack,{passive:true}); addEventListener('resize',updCrack); updCrack();
+
+  /* taiyaki: take a bite */
+  var yums=['om nom','mmm','yummy','tasty','not too sweet','crunch!','so chewy'], lastYum='';
+  function yum(){ var w; do{ w=yums[Math.floor(Math.random()*yums.length)]; }while(w===lastYum); lastYum=w; return w; }
+  document.querySelectorAll('.fish').forEach(function(f){
+    f.dataset.bites='0';
+    f.addEventListener('click', function(){
+      var b=(+f.dataset.bites)+1;
+      var bubble=document.createElement('span'); bubble.className='nom';
+      if(b<=3){
+        f.classList.remove('b1','b2','b3'); f.classList.add('b'+b);
+        bubble.textContent = yum();
+        f.dataset.bites=b;
+      } else {
+        f.classList.remove('b1','b2','b3'); f.dataset.bites='0';
+        f.classList.remove('respawn'); void f.offsetWidth; f.classList.add('respawn');
+        bubble.textContent='fresh one, hot off the iron!';
+      }
+      f.appendChild(bubble); setTimeout(function(){bubble.remove()},950);
+    });
+  });
+
+  /* merch: flip cards */
+  document.querySelectorAll('.flip').forEach(function(c){
+    c.addEventListener('click', function(){
+      var on=c.classList.toggle('flipped'); c.setAttribute('aria-pressed', on?'true':'false');
+    });
+  });
+
+  /* soft serve: happy bounce on tap */
+  document.querySelectorAll('.cupcard').forEach(function(c){
+    c.addEventListener('click', function(){
+      c.classList.remove('bounce'); void c.offsetWidth; c.classList.add('bounce');
+    });
+  });
+
+  /* soft serve: cup / taiyaki cone toggle */
+  var swirl=document.getElementById('swirl'), hint=document.getElementById('serveHint');
+  document.querySelectorAll('.serve-toggle button').forEach(function(t){
+    t.addEventListener('click', function(){
+      var cone = t.dataset.mode==='cone';
+      swirl.classList.toggle('cone-on', cone);
+      document.querySelectorAll('.serve-toggle button').forEach(function(b){ b.setAttribute('aria-pressed', b===t ? 'true':'false'); });
+      hint.textContent = cone ? 'a crispy mochi taiyaki, tail-up in your swirl' : 'just the swirl, in our smiley cup';
+    });
+  });
+
+  /* h2 pop on scroll */
+  if(!rm && 'IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('pop'); io.unobserve(e.target); } });
+    },{threshold:.6});
+    document.querySelectorAll('h2').forEach(function(h){io.observe(h)});
+  }
+
+  /* scroll buddy */
+  var buddy=document.getElementById('buddy'), lastY=0;
+  if(buddy && !rm){
+    addEventListener('scroll', function(){
+      var max=document.documentElement.scrollHeight-innerHeight;
+      var p=max>0?scrollY/max:0;
+      buddy.style.top=(12+p*70)+'vh';
+      buddy.style.transform='rotate('+(scrollY>=lastY?90:-90)+'deg) scaleY('+(scrollY>=lastY?1:-1)+')';
+      lastY=scrollY;
+    },{passive:true});
+  } else if(buddy){ buddy.style.display='none'; }
+
+  /* footer easter egg: fish rain */
+  var face=document.getElementById('fsmile'), clicks=[], fishes=['fish-matcha','fish-taro','fish-custard','fish-redbean','fish-nutella','fish-oreo','fish-blacksesame','fish-vietcoffee'];
+  face.addEventListener('click', function(){
+    var now=Date.now(); clicks=clicks.filter(function(t){return now-t<2000}); clicks.push(now);
+    face.style.transform='rotate('+(Math.random()*30-15)+'deg) scale(1.15)';
+    setTimeout(function(){face.style.transform=''},200);
+    if(clicks.length>=3 && !rm){
+      clicks=[];
+      for(var i=0;i<14;i++){
+        var r=document.createElement('img'); r.className='rainfish'; r.alt='';
+        r.src='img/'+fishes[i%fishes.length]+'.svg';
+        r.style.setProperty('--x',(Math.random()*92+2)+'vw');
+        r.style.setProperty('--t',(2+Math.random()*1.6)+'s');
+        r.style.setProperty('--d',(Math.random()*0.9)+'s');
+        r.style.setProperty('--spin',(Math.random()*540-270)+'deg');
+        document.body.appendChild(r);
+        setTimeout(function(el){return function(){el.remove()}}(r),5200);
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>
